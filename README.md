@@ -2,8 +2,7 @@
 
 Build realistic Sionna RT scenes from OpenStreetMap and LTE Italy data, either with a GUI or with notebooks, then load and visualize the exported scene in Scene-Edit.
 
-## GitHub Short Description
-OpenStreetMap + LTE Italy to Sionna RT exporter (GUI + notebook), with BTS clustering and Scene-Edit visualization workflow.
+![Gui example](images/gui.png)
 
 ## What This Project Does
 This toolchain helps you:
@@ -69,6 +68,8 @@ After exporting from GUI or notebook:
    - `simple_OSM_scene.xml`
    - project JSON (if present)
 4. It places BTS and renders/previews the scene.
+
+![Sionna notebook example](images/sionna.png)
 
 ## Configurable Variables
 
