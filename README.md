@@ -1,28 +1,28 @@
-# LTE-italy-SionnaExportTool
+# NetMonster-SionnaExportTool
 
-Build realistic Sionna RT scenes from OpenStreetMap and LTE Italy data, either with a GUI or with notebooks, then load and visualize the exported scene in Scene-Edit.
+Build realistic Sionna RT scenes from OpenStreetMap and NetMonster data, either with a GUI or with notebooks, then load and visualize the exported scene in Scene-Edit.
 
 ![Gui example](images/gui.png)
 
 ## What This Project Does
 This toolchain helps you:
-- Import an LTE Italy `.ntm` database
+- Import a NetMonster `.ntm` database
 - Select an area on a map
 - Export a complete Sionna-ready project:
   - scene XML
   - mesh files (`.ply`) for ground/buildings/roads
   - project metadata JSON with selected BTS
-- Load and visualize the exported scene in `Scene-Edit-LTE-italy.ipynb`
+- Load and visualize the exported scene in `Scene-Edit-post-gui.ipynb`
 
 You can export in two ways:
 - GUI app: `gui.py`
-- Notebook workflow: `OSM_to_Sionna_LTE-italy.ipynb`
+- Notebook workflow: `netmonster2sionna.ipynb`
 
 ## Project Structure
 - `gui.py`: interactive GUI to load DB, select area, export JSON + XML + meshes
-- `OSM_to_Sionna_LTE-italy.ipynb`: notebook-based export workflow
-- `Scene-Edit-LTE-italy.ipynb`: load latest exported project and visualize scene/BTS
-- `tim_20250716_lteitaly.ntm`: LTE Italy database example
+- `netmonster2sionna.ipynb`: notebook-based export workflow
+- `Scene-Edit-post-gui.ipynb`: load latest exported project and visualize scene/BTS
+- `tim_20250716_lteitaly.ntm`: NetMonster database example
 - `simple_scene/`: export output root
 
 ## Requirements
@@ -45,7 +45,7 @@ Notes:
    ```bash
    python gui.py
    ```
-2. Click `Load .ntm file` and select your LTE Italy `.ntm` database.
+2. Click `Load .ntm file` and select your NetMonster `.ntm` database.
 3. On the map:
    - Right click -> `Add Polygon Vertex` (add at least 3 points)
    - Right click -> `Close Selection Polygon`
@@ -54,7 +54,7 @@ Notes:
 6. Click `EXPORT FULL PROJECT (JSON + XML)`.
 
 ### Option B: Notebook Export
-1. Open `OSM_to_Sionna_LTE-italy.ipynb`.
+1. Open `netmonster2sionna.ipynb`.
 2. Edit the `CONFIG` cell (see variables section below).
 3. Execute cells top-to-bottom.
 4. Draw/select your area in the map cell.
@@ -62,7 +62,7 @@ Notes:
 
 ## Scene Visualization Workflow
 After exporting from GUI or notebook:
-1. Open `Scene-Edit-LTE-italy.ipynb`.
+1. Open `Scene-Edit-post-gui.ipynb`.
 2. Run cells from top to bottom.
 3. The notebook auto-detects the latest folder in `simple_scene/` and loads:
    - `simple_OSM_scene.xml`
@@ -85,11 +85,11 @@ Technical defaults in code:
 - OSM query timeout/cache settings
 - Materials/camera defaults for scene XML
 
-### In Notebook (`OSM_to_Sionna_LTE-italy.ipynb`)
+### In Notebook (`netmonster2sionna.ipynb`)
 Edit the `CONFIG` dictionary in the configuration cell:
 - `map_center_lat`, `map_center_lon`: default map center
 - `location_label`: label used in folder naming
-- `ntm_db_filename`: LTE database filename
+- `ntm_db_filename`: NetMonster database filename
 - `project_json_name`: output JSON project name
 - `export_project_json`: enable/disable JSON export
 - `cluster_colocated_bts`: cluster BTS at same coordinates
@@ -100,7 +100,7 @@ Edit the `CONFIG` dictionary in the configuration cell:
 - `rt_random_seed`: reproducible RT random seed
 - `rt_no_preview`: render image instead of interactive preview
 
-## LTE Italy Database Import
+## NetMonster Database Import
 The tool expects a semicolon-separated `.ntm` file (example in repo: `tim_20250716_lteitaly.ntm`).
 
 Parsed columns are:
@@ -140,7 +140,7 @@ Details:
 - JSON stores area polygon, center, EPSG, and selected BTS metadata
 
 ## End-to-End Flow Summary
-1. Load LTE DB (`.ntm`)
+1. Load NetMonster DB (`.ntm`)
 2. Select polygon area
 3. Query OSM for buildings and roads
 4. Generate meshes (`.ply`)
@@ -161,7 +161,7 @@ Details:
   - ensure paths in XML point to existing files
 - No BTS found:
   - verify `.ntm` loaded correctly
-  - ensure polygon overlaps region with LTE entries
+  - ensure polygon overlaps region with NetMonster entries
 
 ## Suggested First Test (2-3 minutes)
 1. Run GUI
@@ -169,6 +169,9 @@ Details:
 3. Draw a small polygon in Milan
 4. Enable clustering
 5. Export with project name `quick_test`
-6. Open `Scene-Edit-LTE-italy.ipynb` and run all cells
+6. Open `Scene-Edit-post-gui.ipynb` and run all cells
 
 You should see exported BTS and a render/preview of the generated scene.
+
+---
+**Note:** This tool is fully compatible with LTE Italy database files (`.ntm`).

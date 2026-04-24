@@ -26,16 +26,16 @@ try:
 except ImportError:
     HAS_SIONNA_LIBS = False
 
-class LTEItalySelectionGUI:
+class NetMonsterSelectionGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("Sionna Project Designer - LTE Selection")
+        self.root.title("Sionna Project Designer - NetMonster Selection")
         self.root.geometry("1300x850")
 
         # --- Localization (English Only) ---
         self.texts = {
-            "title": "Sionna Project Designer - LTE Selection",
-            "db_label": "1. LTE Italy Database",
+            "title": "Sionna Project Designer - NetMonster Selection",
+            "db_label": "1. NetMonster Database",
             "db_load": "Load .ntm file",
             "db_none": "No database loaded",
             "db_ready": "Database ready: {} BTS",
@@ -555,4 +555,4 @@ class LTEItalySelectionGUI:
             else: self.root.after(0, append)
 
 if __name__ == "__main__":
-    root = tk.Tk(); app = LTEItalySelectionGUI(root); root.mainloop()
+    root = tk.Tk(); app = NetMonsterSelectionGUI(root); root.mainloop()
